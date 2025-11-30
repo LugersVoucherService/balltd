@@ -165,7 +165,7 @@
     "reforge": "2x Size🍔 , Binoculars👓"
   },
   {
-    "name": "Shiny Magic 8 Bal l",
+    "name": "Shiny Magic 8 Ball",
     "image": "https://lh3.googleusercontent.com/sitesv/AAzXCkfxcEpkhUP007PR3lQ2S8208_Xgn5dPdZQIFazwFBNaJSUa3ycMRdxlsvcLBE20MKetcDxIbspsHvJsAS9mcbW9jsvI6BhdYy-MrI6ZMjyzpIuEiKnQ5wQkbQH7j7aEHySm95f3fjS7TCEYXWktnooGYJ75xHXyoVMii41RDkQU1vhyC_LW-u7J3a0=w1280",
     "raw": "0 Exists ------------------- Value: O/C Gems: O/C Coins: O/C ------------------- Demand: Supreme Status: Fluctuating ------------------- Best Reforge: Binoculars👓 , Ranger🔫 , Lightning ⚡",
     "exists": 0,
@@ -179,4 +179,5 @@
     "status": "Fluctuating",
     "reforge": "Binoculars👓 , Ranger🔫 , Lightning ⚡"
   }
+
 ]
