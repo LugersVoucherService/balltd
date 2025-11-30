@@ -53,8 +53,8 @@
     "value_max": 225000,
     "gems_min": 150000,
     "gems_max": 150000,
-    "coins_min": 10,
-    "coins_max": 10,
+    "coins_min": 10000000,
+    "coins_max": 15000000,
     "demand": "Below Average Status",
     "status": "Stable",
     "reforge": "2x Size🍔 , Divine✨"
@@ -169,8 +169,8 @@
     "image": "https://lh3.googleusercontent.com/sitesv/AAzXCkeUghlybosWs4dW0MqQSt98U0x92SApE9PLIFdFTTP7YT1jCRULljODbL0mnkI3qNzSSQ_7_zlJA85Q5gfNtZt4UBOgIUKO5pbEHEdosOJdAcHFToLsNIyCS1RvaAPfkcsd_rqcfHCzkO6aePDp5dcNBZ78L8tE3a0QDRxt5DdIhJnVCWVBxpitTEavBL5kHM1FuLM0rz5CdcBAjbeq6X3mc2DgJ0rISqV9=w1280",
     "raw": "23 Exists ------------------- Value: 1. 7m Gems: 1.1m Coins: 26m ------------------- Demand: Normal Status: Fluctuating ------------------- Best Reforge: 2x Size🍔 , Binoculars👓",
     "exists": 23,
-    "value_min": 0,
-    "value_max": 0,
+    "value_min": 1700000,
+    "value_max": 1700000,
     "gems_min": 1100000,
     "gems_max": 1100000,
     "coins_min": 26000000,
@@ -314,4 +314,5 @@
     "status": "Stable",
     "reforge": "2x Size🍔"
   }
+
 ]
