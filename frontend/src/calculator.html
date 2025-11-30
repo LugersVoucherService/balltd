@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator - Roblox Trade Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="https://discord.com/users/1149910630678134916" target="_blank">
+                <i class="fa-solid fa-calculator"></i>
+                <span>Ball TD <small>(made by 88)</small></span>
+            </a>
+        </div>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="calculator.html" class="active">Calculator</a>
+            <a href="values.html">Values</a>
+            <a href="conversions.html">Conversions</a>
+        </nav>
+    </header>
+    <main>
+        <section class="calculator-container">
+            <div class="trade-side" id="my-offer">
+                <div class="side-header">
+                    <h2>My Offer</h2>
+                    <div class="total-value">
+                        <span class="value-display" id="my-total-value">0</span>
+                    </div>
+                </div>
+
+                <div class="items-grid" id="my-items-container">
+                    <div class="empty-state">
+                        <i class="fa-solid fa-plus"></i>
+                        <p>Add Items</p>
+                    </div>
+                </div>
+
+                <div class="currency-inputs">
+                    <div class="input-group">
+                        <label><img src="../src/images/gems.png" alt="Gems"></label>
+                        <input type="text" id="my-gems" placeholder="Gems (e.g. 5m)">
+                    </div>
+                    <div class="input-group">
+                        <label><img src="../src/images/coins.png" alt="Coins"></label>
+                        <input type="text" id="my-coins" placeholder="Coins (e.g. 1b)">
+                    </div>
+                    <div class="input-group">
+                        <label><img src="../src/images/robux.png" alt="Robux"></label>
+                        <input type="text" id="my-robux" placeholder="Robux (e.g. 10k)">
+                    </div>
+                </div>
+
+                <button class="add-item-btn" onclick="openItemSelector('my')">
+                    <i class="fa-solid fa-plus"></i> Add Items
+                </button>
+            </div>
+
+            <div class="trade-status">
+                <div class="status-indicator" id="trade-result">
+                    <span class="status-text">Waiting...</span>
+                    <span class="status-subtext">Add items to calculate</span>
+                </div>
+                <div class="value-diff">
+                    <span>Difference:</span>
+                    <span id="value-difference">0</span>
+                </div>
+                <div class="exchange-icon">
+                    <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                </div>
+            </div>
+
+            <div class="trade-side" id="their-offer">
+                <div class="side-header">
+                    <h2>Their Offer</h2>
+                    <div class="total-value">
+                        <span class="value-display" id="their-total-value">0</span>
+                    </div>
+                </div>
+
+                <div class="items-grid" id="their-items-container">
+                    <div class="empty-state">
+                        <i class="fa-solid fa-plus"></i>
+                        <p>Add Items</p>
+                    </div>
+                </div>
+
+                <div class="currency-inputs">
+                    <div class="input-group">
+                        <label><img src="../src/images/gems.png" alt="Gems"></label>
+                        <input type="text" id="their-gems" placeholder="Gems (e.g. 5m)">
+                    </div>
+                    <div class="input-group">
+                        <label><img src="../src/images/coins.png" alt="Coins"></label>
+                        <input type="text" id="their-coins" placeholder="Coins (e.g. 1b)">
+                    </div>
+                    <div class="input-group">
+                        <label><img src="../src/images/robux.png" alt="Robux"></label>
+                        <input type="text" id="their-robux" placeholder="Robux (e.g. 10k)">
+                    </div>
+                </div>
+
+                <button class="add-item-btn" onclick="openItemSelector('their')">
+                    <i class="fa-solid fa-plus"></i> Add Items
+                </button>
+            </div>
+        </section>
+    </main>
+    <div class="modal-overlay" id="item-selector-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Select Item</h3>
+                <button class="close-modal" onclick="closeItemSelector()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="item-search" placeholder="Search for units...">
+            </div>
+            <div class="items-list" id="modal-items-list">
+
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="calculator.html">Calculator</a></li>
+                    <li><a href="values.html">Values</a></li>
+                    <li><a href="conversions.html">Conversions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Community</h4>
+                <ul class="footer-links">
+                    <li><a href="https://discord.gg/3rhB8yFM4N" target="_blank"><i class="fab fa-discord"></i> Discord</a></li>
+                    <li><a href="https://www.roblox.com/games/18343561950/Ball-Tower-Defense" target="_blank"><i class="fas fa-gamepad"></i> Roblox Game</a></li>
+                    <li><a href="https://www.roblox.com/communities/32380537/Cash-Grab-Studios#!/about" target="_blank"><i class="fas fa-users"></i> Group</a></li>
+                    <li><a href="https://www.roblox.com/users/9853039234/profile" target="_blank"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="https://sites.google.com/view/gggballtdvalues/home?authuser=0" target="_blank">GGG Values</a></li>
+                    <li><a href="https://sites.google.com/view/ball-td-tower-values-dps-list/damage-per-second-list/dps-omega?authuser=0" target="_blank">DPS List</a></li>
+                    <li><a href="credits.html">Credits</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Ball TD Trade Calculator | Made by <a href="https://discord.com/users/1149910630678134916" target="_blank">88</a></p>
+        </div>
+    </footer>
+    <script src="../js/data.js"></script>
+    <script src="../js/script.js"></script>
+</body>
+</html>

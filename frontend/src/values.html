@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Values - Roblox Trade Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .values-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 5%;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .page-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .filters-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 0.8rem;
+            color: var(--text-main);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .filter-group input:focus,
+        .filter-group select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            flex: 1;
+            min-width: 150px;
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+
+        .stat-card .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .units-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .unit-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInScale 0.4s ease backwards;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .unit-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .unit-card .unit-image-wrapper {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .unit-card .unit-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+            transition: transform 0.3s;
+        }
+
+        .unit-card:hover .unit-image {
+            transform: scale(1.1) rotate(2deg);
+        }
+
+        .unit-card .unit-name {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .unit-card .unit-category {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+            text-transform: capitalize;
+        }
+
+        .unit-card .unit-value {
+            font-size: 0.9rem;
+            color: var(--success);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+        }
+
+        .loading-indicator {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        .loading-spinner {
+            border: 3px solid var(--glass-border);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Tower Details Modal */
+        .tower-modal-content {
+            max-width: 900px;
+            max-height: 90vh;
+        }
+
+        .tower-modal-body {
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .tower-header-section {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+        }
+
+        .tower-large-image {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 1rem;
+            background: var(--bg-card);
+            padding: 1rem;
+            border: 1px solid var(--glass-border);
+        }
+
+        .tower-header-info {
+            flex: 1;
+        }
+
+        .tower-header-info h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .tower-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .tower-info-item {
+            background: var(--bg-card);
+            padding: 1rem;
+            border-radius: 0.8rem;
+            border: 1px solid var(--glass-border);
+        }
+
+        .tower-info-item label {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tower-info-item .value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .demand-badge, .status-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .demand-poor { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+        .demand-low { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+        .demand-below { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+        .demand-normal { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        .demand-above { background: rgba(16, 185, 129, 0.2); color: var(--success); }
+        .demand-great { background: rgba(139, 92, 246, 0.2); color: var(--accent); }
+        .demand-godly { background: rgba(236, 72, 153, 0.2); color: #ec4899; }
+        .demand-supreme { background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(236, 72, 153, 0.3)); color: #fff; }
+
+        .status-stable { background: rgba(16, 185, 129, 0.2); color: var(--success); }
+        .status-rising { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .status-dropping { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+        .status-fluctuating { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+
+        .trading-suggestions {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .trading-suggestions h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .suggestions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .suggestion-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .suggestion-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .suggestion-card .suggestion-image-wrapper {
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .suggestion-card .suggestion-image-wrapper img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .suggestion-card .name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .suggestion-card .value {
+            color: var(--success);
+            font-size: 0.85rem;
+        }
+
+        .unit-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .unit-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .demand-scale {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 0.8rem;
+            border: 1px solid var(--glass-border);
+        }
+
+        .demand-scale-item {
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            opacity: 0.4;
+            transition: all 0.3s ease;
+            cursor: help;
+        }
+
+        .demand-scale-item.active {
+            opacity: 1;
+            transform: scale(1.1);
+            box-shadow: 0 0 15px currentColor;
+        }
+
+        .demand-scale-arrow {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="https://discord.com/users/1149910630678134916" target="_blank">
+                <i class="fa-solid fa-calculator"></i>
+                <span>Ball TD <small>(made by 88)</small></span>
+            </a>
+        </div>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="calculator.html">Calculator</a>
+            <a href="values.html" class="active">Values</a>
+            <a href="conversions.html">Conversions</a>
+        </nav>
+    </header>
+    <main>
+        <div class="values-container">
+            <div class="page-header">
+                <h1>Unit Values</h1>
+                <p>Browse units and click any card to see details</p>
+            </div>
+
+            <div id="loading-indicator" class="loading-indicator">
+                <div class="loading-spinner"></div>
+                <p>Loading units...</p>
+            </div>
+
+            <div id="content-area" style="display: none;">
+                <div class="stats-bar">
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-units">0</div>
+                        <div class="stat-label">Total Units</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="visible-units">0</div>
+                        <div class="stat-label">Visible Units</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-value">0</div>
+                        <div class="stat-label">Total Value</div>
+                    </div>
+                </div>
+
+                <div class="filters-bar">
+                    <div class="filter-group">
+                        <label for="search-input">Search</label>
+                        <input type="text" id="search-input" placeholder="Search by name...">
+                    </div>
+                    <div class="filter-group">
+                        <label for="category-filter">Category</label>
+                        <select id="category-filter">
+                            <option value="">All Categories</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="sort-filter">Sort By</label>
+                        <select id="sort-filter">
+                            <option value="value-desc">Value: High to Low</option>
+                            <option value="value-asc">Value: Low to High</option>
+                            <option value="name-asc">Name: A to Z</option>
+                            <option value="name-desc">Name: Z to A</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="units-grid" id="units-grid">
+                    <!-- Units will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="modal-overlay" id="tower-details-modal">
+        <div class="modal-content tower-modal-content">
+            <div class="modal-header">
+                <h3 id="modal-tower-name">Tower Name</h3>
+                <button class="close-modal" onclick="closeTowerModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="tower-modal-body" id="tower-modal-body">
+            </div>
+        </div>
+    </div>
+    <script src="../js/data.js"></script>
+    <script>
+        let allUnits = [];
+        let filteredUnits = [];
+
+        function formatNumber(num) {
+            if (typeof num !== 'number' || isNaN(num)) return '0';
+            if (num >= 1_000_000_000) return (num / 1_000_000_000).toFixed(1) + "B";
+            if (num >= 1_000_000) return (num / 1_000_000).toFixed(1) + "M";
+            if (num >= 1_000) return (num / 1_000).toFixed(1) + "k";
+            return Math.floor(num).toString();
+        }
+
+        function formatRange(item) {
+            if (!item) return '0';
+            if (item.value_min === "O/C" || item.value_max === "O/C") {
+                return "O/C";
+            }
+            if (typeof item.value_min === "number" && typeof item.value_max === "number") {
+                if (item.value_min === item.value_max) {
+                    return formatNumber(item.value_min);
+                }
+                return `${formatNumber(item.value_min)} – ${formatNumber(item.value_max)}`;
+            }
+            return '0';
+        }
+
+        function formatCategoryName(category) {
+            return category
+                .replace(/([A-Z])/g, ' $1')
+                .replace(/^./, str => str.toUpperCase())
+                .trim();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function getDemandClass(demand) {
+            if (!demand) return 'demand-poor';
+            const d = demand.toLowerCase().split(' ')[0];
+            if (d.includes('poor')) return 'demand-poor';
+            if (d.includes('low')) return 'demand-low';
+            if (d.includes('below')) return 'demand-below';
+            if (d.includes('normal')) return 'demand-normal';
+            if (d.includes('above')) return 'demand-above';
+            if (d.includes('great')) return 'demand-great';
+            if (d.includes('godly')) return 'demand-godly';
+            if (d.includes('supreme')) return 'demand-supreme';
+            return 'demand-normal';
+        }
+
+        function getStatusClass(status) {
+            if (!status) return 'status-stable';
+            const s = status.toLowerCase();
+            if (s.includes('stable') || s.includes('fluctuating')) return 'status-stable';
+            if (s.includes('rising')) return 'status-rising';
+            if (s.includes('dropping')) return 'status-dropping';
+            return 'status-stable';
+        }
+
+        function formatGemsRange(item) {
+            if (!item) return 'N/A';
+            if (item.gems_min === "O/C" || item.gems_max === "O/C") return "O/C";
+            if (typeof item.gems_min === "number" && typeof item.gems_max === "number") {
+                if (item.gems_min === item.gems_max) {
+                    return formatNumber(item.gems_min);
+                }
+                return `${formatNumber(item.gems_min)} – ${formatNumber(item.gems_max)}`;
+            }
+            return 'N/A';
+        }
+
+        function formatCoinsRange(item) {
+            if (!item) return 'N/A';
+            if (item.coins_min === "O/C" || item.coins_max === "O/C") return "O/C";
+            if (typeof item.coins_min === "number" && typeof item.coins_max === "number") {
+                if (item.coins_min === item.coins_max) {
+                    return formatNumber(item.coins_min);
+                }
+                return `${formatNumber(item.coins_min)} – ${formatNumber(item.coins_max)}`;
+            }
+            return 'N/A';
+        }
+
+        function findTradingSuggestions(unit) {
+            if (!unit || !allUnits) return [];
+            
+            const unitValue = unit.value_avg || 0;
+            const unitGems = typeof unit.gems_min === 'number' ? (unit.gems_min + (unit.gems_max || unit.gems_min)) / 2 : 0;
+            const unitCoins = typeof unit.coins_min === 'number' ? (unit.coins_min + (unit.coins_max || unit.coins_min)) / 2 : 0;
+            
+            // Find units with similar value, stable/good demand
+            const suggestions = allUnits
+                .filter(u => {
+                    if (u.id === unit.id) return false;
+                    if (u.name === "Unknown") return false;
+                    
+                    const uValue = u.value_avg || 0;
+                    const valueDiff = Math.abs(uValue - unitValue) / Math.max(unitValue, 1);
+                    
+                    // Similar value (within 50% difference)
+                    if (valueDiff > 0.5) return false;
+                    
+                    // Check demand - prefer good demand
+                    const demand = (u.demand || '').toLowerCase();
+                    const goodDemand = demand.includes('great') || demand.includes('godly') || 
+                                      demand.includes('supreme') || demand.includes('above') || 
+                                      demand.includes('normal');
+                    
+                    // Check status - prefer stable/rising
+                    const status = (u.status || '').toLowerCase();
+                    const goodStatus = status.includes('stable') || status.includes('rising') || 
+                                      status.includes('fluctuating');
+                    
+                    return goodDemand && goodStatus;
+                })
+                .map(u => {
+                    const uValue = u.value_avg || 0;
+                    const uGems = typeof u.gems_min === 'number' ? (u.gems_min + (u.gems_max || u.gems_min)) / 2 : 0;
+                    const uCoins = typeof u.coins_min === 'number' ? (u.coins_min + (u.coins_max || u.coins_min)) / 2 : 0;
+                    
+                    // Calculate similarity score
+                    const valueScore = 1 - (Math.abs(uValue - unitValue) / Math.max(unitValue, 1));
+                    const gemsScore = unitGems > 0 ? 1 - (Math.abs(uGems - unitGems) / Math.max(unitGems, 1)) : 0;
+                    const coinsScore = unitCoins > 0 ? 1 - (Math.abs(uCoins - unitCoins) / Math.max(unitCoins, 1)) : 0;
+                    
+                    const similarity = (valueScore * 0.5) + (gemsScore * 0.25) + (coinsScore * 0.25);
+                    
+                    return { unit: u, similarity };
+                })
+                .sort((a, b) => b.similarity - a.similarity)
+                .slice(0, 6); // Top 6 suggestions
+            
+            return suggestions.map(s => s.unit);
+        }
+
+        function showTowerDetails(unit) {
+            const modal = document.getElementById('tower-details-modal');
+            const modalBody = document.getElementById('tower-modal-body');
+            const modalName = document.getElementById('modal-tower-name');
+            
+            modalName.textContent = unit.name;
+            
+            const suggestions = findTradingSuggestions(unit);
+            
+            modalBody.innerHTML = `
+                <div class="tower-header-section">
+                    <img src="${unit.image || ''}" alt="${escapeHtml(unit.name)}" 
+                         class="tower-large-image"
+                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzMzMzM4MSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM2NjY2NzEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD48L3N2Zz4='">
+                    <div class="tower-header-info">
+                        <h2>${escapeHtml(unit.name)}</h2>
+                        <div class="tower-info-grid">
+                            <div class="tower-info-item">
+                                <label>Category</label>
+                                <div class="value">${formatCategoryName(unit.category)}</div>
+                            </div>
+                            <div class="tower-info-item">
+                                <label>Exists</label>
+                                <div class="value">${formatNumber(unit.exists || 0)}</div>
+                            </div>
+                            <div class="tower-info-item">
+                                <label>Value</label>
+                                <div class="value">
+                                    <img src="../src/images/gems.png" alt="Gems" class="currency-icon-small">
+                                    ${formatRange(unit)}
+                                </div>
+                            </div>
+                            <div class="tower-info-item">
+                                <label>Gems</label>
+                                <div class="value">
+                                    <img src="../src/images/gems.png" alt="Gems" class="currency-icon-small">
+                                    ${formatGemsRange(unit)}
+                                </div>
+                            </div>
+                            <div class="tower-info-item">
+                                <label>Coins</label>
+                                <div class="value">
+                                    <img src="../src/images/coins.png" alt="Coins" class="currency-icon-small">
+                                    ${formatCoinsRange(unit)}
+                                </div>
+                            </div>
+                            <div class="tower-info-item" style="grid-column: 1 / -1;">
+                                <label>Demand</label>
+                                <div class="value" style="flex-direction: column; align-items: flex-start; gap: 1rem;">
+                                    <span class="demand-badge ${getDemandClass(unit.demand)}">${escapeHtml(unit.demand || 'Unknown')}</span>
+                                    <div class="demand-scale">
+                                        <div class="demand-scale-item ${getDemandClass('Poor')} ${(unit.demand || '').toLowerCase().includes('poor') ? 'active' : ''}" title="Poor">Poor</div>
+                                        <div class="demand-scale-arrow">➡</div>
+                                        <div class="demand-scale-item ${getDemandClass('Low')} ${(unit.demand || '').toLowerCase().includes('low') ? 'active' : ''}" title="Low">Low</div>
+                                        <div class="demand-scale-arrow">➡</div>
+                                        <div class="demand-scale-item ${getDemandClass('Below Average')} ${(unit.demand || '').toLowerCase().includes('below') ? 'active' : ''}" title="Below Average">Below Avg</div>
+                                        <div class="demand-scale-arrow">➡</div>
+                                        <div class="demand-scale-item ${getDemandClass('Normal')} ${(unit.demand || '').toLowerCase().includes('normal') ? 'active' : ''}" title="Normal">Normal</div>
+                                        <div class="demand-scale-arrow">➡</div>
+                                        <div class="demand-scale-item ${getDemandClass('Above Average')} ${(unit.demand || '').toLowerCase().includes('above') ? 'active' : ''}" title="Above Average">Above Avg</div>
+                                        <div class="demand-scale-arrow">➡</div>
+                                        <div class="demand-scale-item ${getDemandClass('Great')} ${(unit.demand || '').toLowerCase().includes('great') ? 'active' : ''}" title="Great">Great</div>
+                                        <div class="demand-scale-arrow">➡</div>
+                                        <div class="demand-scale-item ${getDemandClass('Godly')} ${(unit.demand || '').toLowerCase().includes('godly') ? 'active' : ''}" title="Godly">Godly</div>
+                                        <div class="demand-scale-arrow">➡</div>
+                                        <div class="demand-scale-item ${getDemandClass('Supreme')} ${(unit.demand || '').toLowerCase().includes('supreme') ? 'active' : ''}" title="Supreme">Supreme</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tower-info-item">
+                                <label>Status</label>
+                                <div class="value">
+                                    <span class="status-badge ${getStatusClass(unit.status)}">${escapeHtml(unit.status || 'Unknown')}</span>
+                                </div>
+                            </div>
+                            <div class="tower-info-item">
+                                <label>Best Reforge</label>
+                                <div class="value">${escapeHtml(unit.reforge || 'N/A')}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                ${suggestions.length > 0 ? `
+                    <div class="trading-suggestions">
+                        <h3><i class="fa-solid fa-lightbulb"></i> Trade Suggestions</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                            Similar value units with good demand you might want:
+                        </p>
+                        <div class="suggestions-grid">
+                            ${suggestions.map(s => {
+                                const cardId = `suggestion-${s.id}`;
+                                return `
+                                <div class="suggestion-card" data-unit-id="${s.id}" id="${cardId}">
+                                    <div class="suggestion-image-wrapper">
+                                        <img src="${s.image || ''}" alt="${escapeHtml(s.name)}" 
+                                             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzMzMzM4MSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM2NjY2NzEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD48L3N2Zz4='">
+                                    </div>
+                                    <div class="name">${escapeHtml(s.name)}</div>
+                                    <div class="value">
+                                        <img src="../src/images/gems.png" alt="Gems" class="currency-icon-small" style="width: 14px; height: 14px;">
+                                        <span>${formatRange(s)}</span>
+                                    </div>
+                                </div>
+                            `;
+                            }).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+            `;
+            
+            // Add click handlers for suggestion cards after modal is populated
+            setTimeout(() => {
+                suggestions.forEach(s => {
+                    const card = document.querySelector(`[data-unit-id="${s.id}"]`);
+                    if (card) {
+                        card.onclick = (e) => {
+                            e.stopPropagation();
+                            showTowerDetails(s);
+                        };
+                    }
+                });
+            }, 10);
+            
+            modal.classList.add('active');
+        }
+
+        function closeTowerModal() {
+            const modal = document.getElementById('tower-details-modal');
+            modal.classList.remove('active');
+        }
+
+        // Close modal on overlay click
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('tower-details-modal');
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        closeTowerModal();
+                    }
+                });
+            }
+            
+            // Close on escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    const modal = document.getElementById('tower-details-modal');
+                    if (modal && modal.classList.contains('active')) {
+                        closeTowerModal();
+                    }
+                }
+            });
+        });
+
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        function renderUnits(unitsToRender) {
+            const grid = document.getElementById('units-grid');
+            
+            if (unitsToRender.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <p>No units found matching your filters</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const fragment = document.createDocumentFragment();
+            
+            unitsToRender.forEach((unit, index) => {
+                const card = document.createElement('div');
+                card.className = 'unit-card';
+                card.style.animationDelay = `${index * 0.02}s`;
+                card.onclick = () => showTowerDetails(unit);
+                
+                const imageSrc = unit.image || '';
+                const valueDisplay = formatRange(unit);
+                const escapedName = escapeHtml(unit.name);
+                
+                card.innerHTML = `
+                    <div class="unit-image-wrapper">
+                        <img src="${imageSrc}" alt="${escapedName}" 
+                             loading="lazy"
+                             class="unit-image"
+                             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzMzMzM4MSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM2NjY2NzEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD48L3N2Zz4='">
+                    </div>
+                    <div class="unit-name" title="${escapedName}">${escapedName}</div>
+                    <div class="unit-category">${formatCategoryName(unit.category)}</div>
+                    <div class="unit-value">
+                        <img src="../src/images/gems.png" alt="Gems" class="currency-icon-small">
+                        <span>${valueDisplay}</span>
+                    </div>
+                `;
+                
+                fragment.appendChild(card);
+            });
+            
+            grid.innerHTML = '';
+            grid.appendChild(fragment);
+        }
+
+        function filterAndSort() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
+            const categoryFilter = document.getElementById('category-filter').value;
+            const sortOption = document.getElementById('sort-filter').value;
+
+            filteredUnits = allUnits.filter(unit => {
+                const matchesSearch = !searchTerm || 
+                    unit.name.toLowerCase().includes(searchTerm) ||
+                    unit.category.toLowerCase().includes(searchTerm);
+                const matchesCategory = !categoryFilter || unit.category === categoryFilter;
+                return matchesSearch && matchesCategory;
+            });
+
+            // Sort
+            filteredUnits.sort((a, b) => {
+                switch(sortOption) {
+                    case 'value-desc':
+                        return (b.value_avg || 0) - (a.value_avg || 0);
+                    case 'value-asc':
+                        return (a.value_avg || 0) - (b.value_avg || 0);
+                    case 'name-asc':
+                        return a.name.localeCompare(b.name);
+                    case 'name-desc':
+                        return b.name.localeCompare(a.name);
+                    default:
+                        return 0;
+                }
+            });
+
+            renderUnits(filteredUnits);
+            updateStats();
+        }
+
+        function updateStats() {
+            document.getElementById('total-units').textContent = allUnits.length;
+            document.getElementById('visible-units').textContent = filteredUnits.length;
+            
+            const totalValue = filteredUnits.reduce((sum, unit) => sum + (unit.value_avg || 0), 0);
+            document.getElementById('total-value').textContent = formatNumber(totalValue);
+        }
+
+        function populateCategoryFilter() {
+            const categories = [...new Set(allUnits.map(u => u.category))];
+            const select = document.getElementById('category-filter');
+            
+            categories.sort().forEach(cat => {
+                const option = document.createElement('option');
+                option.value = cat;
+                option.textContent = formatCategoryName(cat);
+                select.appendChild(option);
+            });
+        }
+
+        // Initialize when units are loaded
+        function initializeValues() {
+            if (units && units.length > 0) {
+                allUnits = units.filter(u => u.name && u.name !== "Unknown");
+                filteredUnits = [...allUnits];
+                
+                document.getElementById('loading-indicator').style.display = 'none';
+                document.getElementById('content-area').style.display = 'block';
+                
+                populateCategoryFilter();
+                filterAndSort();
+                
+                // Setup event listeners
+                const debouncedFilter = debounce(filterAndSort, 200);
+                document.getElementById('search-input').addEventListener('input', debouncedFilter);
+                document.getElementById('category-filter').addEventListener('change', filterAndSort);
+                document.getElementById('sort-filter').addEventListener('change', filterAndSort);
+            } else {
+                setTimeout(initializeValues, 100);
+            }
+        }
+
+        // Wait for units to load
+        if (units && units.length > 0) {
+            initializeValues();
+        } else {
+            window.addEventListener('unitsLoaded', initializeValues, { once: true });
+        }
+    </script>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="calculator.html">Calculator</a></li>
+                    <li><a href="values.html">Values</a></li>
+                    <li><a href="conversions.html">Conversions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Community</h4>
+                <ul class="footer-links">
+                    <li><a href="https://discord.gg/3rhB8yFM4N" target="_blank"><i class="fab fa-discord"></i> Discord</a></li>
+                    <li><a href="https://www.roblox.com/games/18343561950/Ball-Tower-Defense" target="_blank"><i class="fas fa-gamepad"></i> Roblox Game</a></li>
+                    <li><a href="https://www.roblox.com/communities/32380537/Cash-Grab-Studios#!/about" target="_blank"><i class="fas fa-users"></i> Group</a></li>
+                    <li><a href="https://www.roblox.com/users/9853039234/profile" target="_blank"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="https://sites.google.com/view/gggballtdvalues/home?authuser=0" target="_blank">GGG Values</a></li>
+                    <li><a href="https://sites.google.com/view/ball-td-tower-values-dps-list/damage-per-second-list/dps-omega?authuser=0" target="_blank">DPS List</a></li>
+                    <li><a href="credits.html">Credits</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Ball TD Trade Calculator | Made by <a href="https://discord.com/users/1149910630678134916" target="_blank">88</a></p>
+        </div>
+    </footer>
+</body>
+</html>

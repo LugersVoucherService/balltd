@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade - Roblox Trade Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .trade-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 5%;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .page-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            animation: fadeInScale 0.6s ease-out 0.2s backwards;
+        }
+
+        .info-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .info-card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 1rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+        
+        .cta-button:hover {
+            background: var(--accent);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--primary-glow);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            animation: fadeInScale 0.6s ease-out backwards;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px var(--primary-glow));
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="https://discord.com/users/1149910630678134916" target="_blank">
+                <i class="fa-solid fa-calculator"></i>
+                <span>Ball TD <small>(made by 88)</small></span>
+            </a>
+        </div>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="calculator.html">Calculator</a>
+            <a href="values.html">Values</a>
+            <a href="conversions.html">Conversions</a>
+        </nav>
+    </header>
+    <main>
+        <div class="trade-container">
+            <div class="page-header">
+                <h1>Trade Calculator</h1>
+                <p>Calculate and evaluate your trades with ease</p>
+            </div>
+
+            <div class="info-card">
+                <h2>Start Calculating Trades</h2>
+                <p>
+                    Use our powerful trade calculator to evaluate your trades in real-time. 
+                    Compare values, see if you're getting a fair deal, and make informed trading decisions.
+                </p>
+                <a href="../index.html" class="cta-button">
+                    <i class="fa-solid fa-calculator"></i> Go to Calculator
+                </a>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                    </div>
+                    <h3>Fair Trade Evaluation</h3>
+                    <p>
+                        Instantly see if your trade is fair, a win, or a loss. 
+                        Get real-time calculations based on current market values.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <h3>Comprehensive Database</h3>
+                    <p>
+                        Access thousands of units with up-to-date values. 
+                        Search and filter to find exactly what you're looking for.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>
+                        Optimized for speed and performance. 
+                        Calculate trades instantly without any lag or delays.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="calculator.html">Calculator</a></li>
+                    <li><a href="values.html">Values</a></li>
+                    <li><a href="conversions.html">Conversions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Community</h4>
+                <ul class="footer-links">
+                    <li><a href="https://discord.gg/3rhB8yFM4N" target="_blank"><i class="fab fa-discord"></i> Discord</a></li>
+                    <li><a href="https://www.roblox.com/games/18343561950/Ball-Tower-Defense" target="_blank"><i class="fas fa-gamepad"></i> Roblox Game</a></li>
+                    <li><a href="https://www.roblox.com/communities/32380537/Cash-Grab-Studios#!/about" target="_blank"><i class="fas fa-users"></i> Group</a></li>
+                    <li><a href="https://www.roblox.com/users/9853039234/profile" target="_blank"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="https://sites.google.com/view/gggballtdvalues/home?authuser=0" target="_blank">GGG Values</a></li>
+                    <li><a href="https://sites.google.com/view/ball-td-tower-values-dps-list/damage-per-second-list/dps-omega?authuser=0" target="_blank">DPS List</a></li>
+                    <li><a href="credits.html">Credits</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Ball TD Trade Calculator | Made by <a href="https://discord.com/users/1149910630678134916" target="_blank">88</a></p>
+        </div>
+    </footer>
+    <script src="../js/data.js"></script>
+</body>
+</html>

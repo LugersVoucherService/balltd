@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversions - Ball TD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        .conversions-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 5%;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .page-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .currency-status {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .status-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 0.8rem;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: transform 0.3s;
+        }
+
+        .status-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .status-card img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .status-info h3 {
+            margin-bottom: 0.2rem;
+            font-size: 1rem;
+        }
+
+        .status-badge {
+            padding: 0.2rem 0.6rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-deflating {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+
+        .status-stable {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .info-note {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 0.8rem;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .info-note h4 {
+            color: #fbbf24;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .info-note p {
+            color: var(--text-muted);
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+
+        .conversion-sections {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .conversion-section {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .conversion-section h2 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .conversion-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .input-group-large {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-group-large label {
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-with-icon {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 0.8rem;
+            padding: 0.8rem 1rem;
+            transition: all 0.3s;
+        }
+
+        .input-with-icon:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-glow);
+        }
+
+        .input-with-icon img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .input-with-icon input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 1rem;
+            font-weight: 600;
+            outline: none;
+            min-width: 0;
+        }
+
+        .conversion-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .conversion-table thead th {
+            background: var(--bg-card-hover);
+            padding: 0.8rem;
+            text-align: left;
+            font-weight: 700;
+            border-bottom: 2px solid var(--glass-border);
+            color: var(--text-main);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .conversion-table tbody td {
+            padding: 0.7rem 0.8rem;
+            border-bottom: 1px solid var(--glass-border);
+            color: var(--text-muted);
+        }
+
+        .conversion-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .currency-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .currency-header img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+
+        @media (max-width: 968px) {
+            .conversion-sections {
+                grid-template-columns: 1fr;
+            }
+
+            .conversion-section:first-child {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="https://discord.com/users/1149910630678134916" target="_blank">
+                <i class="fa-solid fa-calculator"></i>
+                <span>Ball TD <small>(made by 88)</small></span>
+            </a>
+        </div>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="calculator.html">Calculator</a>
+            <a href="values.html">Values</a>
+            <a href="conversions.html" class="active">Conversions</a>
+        </nav>
+    </header>
+    <main>
+        <div class="conversions-container">
+            <div class="page-header">
+                <h1>Conversion Calculator</h1>
+                <p>Convert between Coins, Gems, and Robux</p>
+            </div>
+
+            <div class="currency-status">
+                <div class="status-card">
+                    <img src="../src/images/coins.png" alt="Coins">
+                    <div class="status-info">
+                        <h3>Coins</h3>
+                        <span class="status-badge status-deflating">Deflating</span>
+                    </div>
+                </div>
+                <div class="status-card">
+                    <img src="../src/images/gems.png" alt="Gems">
+                    <div class="status-info">
+                        <h3>Gems</h3>
+                        <span class="status-badge status-stable">Stable</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-note">
+                <h4><i class="fa-solid fa-info-circle"></i> Note</h4>
+                <p>
+                    Conversion rates vary between Gems/Coins. Coins come from grinding (more players = more coins), while Gems are harder to get.
+                    <strong> Rate: ~90-110x on higher difficulties</strong>
+                </p>
+            </div>
+
+            <div class="conversion-sections">
+                <div class="conversion-section">
+                    <h2><i class="fa-solid fa-calculator"></i> Calculator</h2>
+                    <div class="conversion-inputs">
+                        <div class="input-group-large">
+                            <label>Coins</label>
+                            <div class="input-with-icon">
+                                <img src="../src/images/coins.png" alt="Coins">
+                                <input type="text" id="coins-input" placeholder="0" oninput="fromCoins()">
+                            </div>
+                        </div>
+                        
+                        <div class="input-group-large">
+                            <label>Gems</label>
+                            <div class="input-with-icon">
+                                <img src="../src/images/gems.png" alt="Gems">
+                                <input type="text" id="gems-input" placeholder="0" oninput="fromGems()">
+                            </div>
+                        </div>
+                        
+                        <div class="input-group-large">
+                            <label>Robux</label>
+                            <div class="input-with-icon">
+                                <img src="../src/images/robux.png" alt="Robux">
+                                <input type="text" id="robux-input" placeholder="0" oninput="fromRobux()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="conversion-section">
+                    <h2><i class="fa-solid fa-table"></i> Conversion Table</h2>
+                    <table class="conversion-table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="currency-header">
+                                        <img src="../src/images/coins.png" alt="Coins">
+                                        <span>Coins</span>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="currency-header">
+                                        <img src="../src/images/gems.png" alt="Gems">
+                                        <span>Gems</span>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="currency-header">
+                                        <img src="../src/images/robux.png" alt="Robux">
+                                        <span>Robux</span>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <!-- FIXED STATIC TABLE -->
+                        <tbody id="conversion-table-body">
+                            <tr><td>1</td><td>-</td><td>-</td></tr>
+                            <tr><td>10</td><td>-</td><td>-</td></tr>
+                            <tr><td>100</td><td>1</td><td>-</td></tr>
+                            <tr><td>1K</td><td>10</td><td>-</td></tr>
+                            <tr><td>10K</td><td>100</td><td>-</td></tr>
+                            <tr><td>100K</td><td>1K</td><td>1–10</td></tr>
+                            <tr><td>1M</td><td>10K</td><td>10–50</td></tr>
+                            <tr><td>10M</td><td>100K</td><td>100–250</td></tr>
+                            <tr><td>100M</td><td>1M</td><td>500–1K</td></tr>
+                            <tr><td>1B</td><td>10M</td><td>15K+</td></tr>
+                            <tr><td>10B</td><td>100M</td><td>65K+</td></tr>
+                            <tr><td>100B</td><td>1B</td><td>250K+</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="../js/data.js"></script>
+    <script>
+        const TABLE = [
+            { coins: 1,         gems: null,      robux: null },
+            { coins: 10,        gems: null,      robux: null },
+            { coins: 100,       gems: 1,         robux: null },
+            { coins: 1000,      gems: 10,        robux: null },
+            { coins: 10000,     gems: 100,       robux: null },
+            { coins: 100000,    gems: 1000,      robux: [1,10] },
+            { coins: 1000000,   gems: 10000,     robux: [10,50] },
+            { coins: 10000000,  gems: 100000,    robux: [100,250] },
+            { coins: 100000000, gems: 1000000,   robux: [500,1000] },
+            { coins: 1000000000, gems: 10000000, robux: [15000,15000] },
+            { coins: 10000000000, gems: 100000000, robux: [65000,65000] },
+            { coins: 100000000000, gems: 1000000000, robux: [250000,250000] }
+        ];
+        
+        function fmtNumber(n) {
+            if (typeof n !== "number" || isNaN(n)) return "-";
+        
+            if (n < 1000) return Math.round(n).toString();
+        
+            if (n < 1000000) {
+                let v = n / 1000;
+                return (v % 1 === 0 ? v : v.toFixed(1)) + "K";
+            }
+        
+            if (n < 1000000000) {
+                let v = n / 1e6;
+                return (v % 1 === 0 ? v : v.toFixed(1)) + "M";
+            }
+        
+            let v = n / 1e9;
+            return (v % 1 === 0 ? v : v.toFixed(1)) + "B";
+        }
+        
+        function fmtRobux(min, max) {
+            if (min === max) return fmtNumber(min);
+            return fmtNumber(min) + "–" + fmtNumber(max);
+        }
+        
+        function parseNum(v) {
+            if (!v) return 0;
+            v = v.toLowerCase();
+            if (v.endsWith("b")) return parseFloat(v)*1e9;
+            if (v.endsWith("m")) return parseFloat(v)*1e6;
+            if (v.endsWith("k")) return parseFloat(v)*1e3;
+            return parseFloat(v);
+        }
+        
+        function lerp(a,b,t){ return a + (b-a)*t; }
+        
+        function findByField(value, field) {
+            let A = TABLE[0], B = TABLE[TABLE.length-1];
+        
+            for (let i=0; i<TABLE.length; i++) {
+                let row = TABLE[i];
+                if (row[field] == null) continue;
+        
+                if (value <= row[field]) {
+                    B = row;
+                    A = TABLE[i-1] && TABLE[i-1][field] != null ? TABLE[i-1] : row;
+                    return [A,B];
+                }
+            }
+            return [A,B];
+        }
+        
+        function fromCoins() {
+            const coins = parseNum(document.getElementById("coins-input").value);
+            if (!coins || coins < 1) {
+                document.getElementById("gems-input").value = "";
+                document.getElementById("robux-input").value = "";
+                return;
+            }
+        
+            let A=null, B=null;
+            for (let i=0; i<TABLE.length; i++){
+                if (coins <= TABLE[i].coins){
+                    B = TABLE[i];
+                    A = TABLE[i-1] ?? TABLE[i];
+                    break;
+                }
+            }
+        
+            if (!A.gems || !B.gems) {
+                document.getElementById("gems-input").value = "-";
+                document.getElementById("robux-input").value = "-";
+                return;
+            }
+        
+            const t = (coins - A.coins)/(B.coins - A.coins);
+            const gems = lerp(A.gems, B.gems, t);
+            const rA = A.robux || [0,0];
+            const rB = B.robux || [0,0];
+            const robMin = lerp(rA[0], rB[0], t);
+            const robMax = lerp(rA[1], rB[1], t);
+        
+            document.getElementById("gems-input").value = fmtNumber(gems);
+            document.getElementById("robux-input").value = fmtRobux(robMin, robMax);
+        }
+        
+        function fromGems() {
+            const gems = parseNum(document.getElementById("gems-input").value);
+            if (!gems || gems < 1) {
+                document.getElementById("coins-input").value = "";
+                document.getElementById("robux-input").value = "";
+                return;
+            }
+        
+            let [A,B] = findByField(gems, "gems");
+        
+            if (A.gems==null || B.gems==null) return;
+        
+            const t = (gems - A.gems)/(B.gems - A.gems);
+            const coins = lerp(A.coins, B.coins, t);
+            const rA = A.robux || [0,0];
+            const rB = B.robux || [0,0];
+            const robMin = lerp(rA[0], rB[0], t);
+            const robMax = lerp(rA[1], rB[1], t);
+        
+            document.getElementById("coins-input").value = fmtNumber(coins);
+            document.getElementById("robux-input").value = fmtRobux(robMin, robMax);
+        }
+        
+        function fromRobux() {
+            let rv = document.getElementById("robux-input").value;
+            rv = rv.replace(/\+/g,"").replace(/k/i,"000");
+            const rob = parseNum(rv);
+        
+            if (!rob || rob < 1) {
+                document.getElementById("coins-input").value = "";
+                document.getElementById("gems-input").value = "";
+                return;
+            }
+        
+            let A=null,B=null;
+            for (let i=0; i<TABLE.length; i++){
+                const row = TABLE[i];
+                if (!row.robux) continue;
+        
+                const rMax = row.robux[1] ?? row.robux[0];
+                if (rob <= rMax) {
+                    B = row;
+                    A = TABLE[i-1] ?? row;
+                    break;
+                }
+            }
+        
+            if (!A.robux || !B.robux) return;
+        
+            const rA = A.robux;
+            const rB = B.robux;
+        
+            const t = (rob - rA[1]) / (rB[0] - rA[1]);
+        
+            const coins = lerp(A.coins, B.coins, t);
+            const gems  = lerp(A.gems,  B.gems,  t);
+        
+            document.getElementById("coins-input").value = fmtNumber(coins);
+            document.getElementById("gems-input").value  = fmtNumber(gems);
+        }
+    </script>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="calculator.html">Calculator</a></li>
+                    <li><a href="values.html">Values</a></li>
+                    <li><a href="conversions.html">Conversions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Community</h4>
+                <ul class="footer-links">
+                    <li><a href="https://discord.gg/3rhB8yFM4N" target="_blank"><i class="fab fa-discord"></i> Discord</a></li>
+                    <li><a href="https://www.roblox.com/games/18343561950/Ball-Tower-Defense" target="_blank"><i class="fas fa-gamepad"></i> Roblox Game</a></li>
+                    <li><a href="https://www.roblox.com/communities/32380537/Cash-Grab-Studios#!/about" target="_blank"><i class="fas fa-users"></i> Group</a></li>
+                    <li><a href="https://www.roblox.com/users/9853039234/profile" target="_blank"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="https://sites.google.com/view/gggballtdvalues/home?authuser=0" target="_blank">GGG Values</a></li>
+                    <li><a href="https://sites.google.com/view/ball-td-tower-values-dps-list/damage-per-second-list/dps-omega?authuser=0" target="_blank">DPS List</a></li>
+                    <li><a href="credits.html">Credits</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>Ball TD Trade Calculator | Made by <a href="https://discord.com/users/1149910630678134916" target="_blank">88</a></p>
+        </div>
+    </footer>
+</body>
+</html>

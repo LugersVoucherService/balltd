@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credits - Ball TD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .credits-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 5%;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .credit-section {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            animation: fadeInScale 0.6s ease-out backwards;
+        }
+
+        .credit-section:nth-child(1) { animation-delay: 0.1s; }
+        .credit-section:nth-child(2) { animation-delay: 0.2s; }
+        .credit-section:nth-child(3) { animation-delay: 0.3s; }
+        .credit-section:nth-child(4) { animation-delay: 0.4s; }
+
+        .credit-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .credit-section p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .credit-section a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            word-break: break-all;
+        }
+
+        .credit-section a:hover {
+            text-shadow: 0 0 10px var(--primary-glow);
+            text-decoration: underline;
+        }
+
+        .credit-icon {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="https://discord.com/users/1149910630678134916" target="_blank">
+                <i class="fa-solid fa-calculator"></i>
+                <span>Ball TD <small>(made by 88)</small></span>
+            </a>
+        </div>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="calculator.html">Calculator</a>
+            <a href="values.html">Values</a>
+            <a href="conversions.html">Conversions</a>
+        </nav>
+    </header>
+    <main>
+        <div class="credits-container">
+            <div class="page-header">
+                <h1>Credits</h1>
+                <p>Thanks to everyone who made this possible</p>
+            </div>
+
+            <div class="credit-section">
+                <h2>
+                    <i class="fa-solid fa-code credit-icon"></i>
+                    Website Development
+                </h2>
+                <p>
+                    <strong>88</strong> - Created and developed the entire Ball TD trade calculator website.
+                </p>
+            </div>
+
+            <div class="credit-section">
+                <h2>
+                    <i class="fa-solid fa-lightbulb credit-icon"></i>
+                    Idea & Concept
+                </h2>
+                <p>
+                    <strong>Paul (y2kzx)</strong> - Provided the initial idea for the trade calculator.
+                </p>
+            </div>
+
+            <div class="credit-section">
+                <h2>
+                    <i class="fa-solid fa-database credit-icon"></i>
+                    Data Sources
+                </h2>
+                <p>
+                    <strong>Unit Values:</strong> 
+                    <a href="https://sites.google.com/view/gggballtdvalues/home?authuser=0" target="_blank">
+                        GGG Ball TD Values
+                    </a> - For providing updated unit values and trading information.
+                </p>
+            </div>
+
+            <div class="credit-section">
+                <h2>
+                    <i class="fa-solid fa-image credit-icon"></i>
+                    Icons & Assets
+                </h2>
+                <p>
+                    <strong>Currency Icons (Coins, Gems):</strong>
+                    <a href="https://sites.google.com/view/ball-td-tower-values-dps-list/damage-per-second-list/dps-omega?authuser=0" target="_blank">
+                        Ball TD Tower Values & DPS List
+                    </a> - For the Coins and Gems icon designs.
+                </p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="calculator.html">Calculator</a></li>
+                    <li><a href="values.html">Values</a></li>
+                    <li><a href="conversions.html">Conversions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Community</h4>
+                <ul class="footer-links">
+                    <li><a href="https://discord.gg/3rhB8yFM4N" target="_blank"><i class="fab fa-discord"></i> Discord</a></li>
+                    <li><a href="https://www.roblox.com/games/18343561950/Ball-Tower-Defense" target="_blank"><i class="fas fa-gamepad"></i> Roblox Game</a></li>
+                    <li><a href="https://www.roblox.com/communities/32380537/Cash-Grab-Studios#!/about" target="_blank"><i class="fas fa-users"></i> Group</a></li>
+                    <li><a href="https://www.roblox.com/users/9853039234/profile" target="_blank"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="https://sites.google.com/view/gggballtdvalues/home?authuser=0" target="_blank">GGG Values</a></li>
+                    <li><a href="https://sites.google.com/view/ball-td-tower-values-dps-list/damage-per-second-list/dps-omega?authuser=0" target="_blank">DPS List</a></li>
+                    <li><a href="credits.html">Credits</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Ball TD Trade Calculator | Made by <a href="https://discord.com/users/1149910630678134916" target="_blank">88</a></p>
+        </div>
+    </footer>
+    <script src="../js/data.js"></script>
+</body>
+</html>
