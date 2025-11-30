@@ -1,20 +1,5 @@
 [
   {
-    "name": "Unknown",
-    "image": "",
-    "raw": "Demand: Poor ➡ Low ➡ Below Average ➡ Normal ➡ Above Average ➡ Great ➡ Godly ➡ Supreme -------------------------------------------------------------- Status: Quickly Dropping ➡ Dropping ➡ Slowly Dropping ➡ Stable / Fluctuating ➡ Slowly Rising ➡ Rising ➡ Rising Quickly -------------------------------------------------------------- Formula: ((NBV- OBV) / OBV) * 100 = % Drop/Rise -------------------------------------------------------------- OBV = Old Ball Value NBV = New Ball Value -------------------------------------------------------------- Quickly Dropping ➡ -20%+ Dropping ➡ -10% - 20% Slowly Dropping ➡ -5% - 10% Stable / Fluctuating ➡ -5% - +5% Slowly Rising ➡ +5% - +10% Rising ➡ +10% - +20% Rising Quickly ➡ 20%+",
-    "exists": 0,
-    "value_min": 20,
-    "value_max": 20,
-    "gems_min": 0,
-    "gems_max": 0,
-    "coins_min": 0,
-    "coins_max": 0,
-    "demand": "Poor",
-    "status": "Quickly Dropping",
-    "reforge": ""
-  },
-  {
     "name": "Plasma Ball",
     "image": "https://lh3.googleusercontent.com/sitesv/AAzXCkcZQipXCjT9iR3nFFNNXGkzOZExOb8icuV7KR8q_kZPqa04cONkyj15kQqtILakM5K4m83kHvzoQDkSJ0153StpeEFO41kYYAy5Pn_OTwsGLMtKmajsPOwC5f6Oj_Jl5tyaZPLGt3cO6m68u5_9Uxi4aKayP6BgDAur5ILGoGCpp9Vg1S6_1XQzMRJLMNV8FsHJCBt7ojFJF7z_PTYvOsGaiN8yqHQwTMvdOCE=w1280",
     "raw": "3.44k Exists ------------------- Value: 125k Gems: 80-100k Coins: 7.5m ------------------- Demand: Low Status: Stable ------------------- Best Reforge: 2x Size🍔",
@@ -64,12 +49,12 @@
     "image": "https://lh3.googleusercontent.com/sitesv/AAzXCkfLj4-70BL7VXxiOeXXi6fS3I_zEJUioETGjKCqeMm3WPtn2vlRorV9G2CTUVgTV23hQI7PQPeOdjsJaYJbLR0KUvKvPlvu10KPqng5Vep7lo-9RzNcBwX0qqoYRbPCJkqk3Z_t-vtaY06CvoIrmJ8qb9mI-08uFQgIJkBXLqs4W_A_Xnbv2ZQ1G9qORmEISqf9AnItp_djBELSpYjyHEsX-n0C708D-WuR7a4=w1280",
     "raw": "3.76k Exists ------------------- Value: 375 - 400k Gems: 300k Coins: 17 -22m ------------------- Demand: Normal Status: Stable ------------------- Best Reforge: 2x Size🍔 , Lightning ⚡",
     "exists": 3760,
-    "value_min": 375,
-    "value_max": 375,
+    "value_min": 375000,
+    "value_max": 400000,
     "gems_min": 300000,
-    "gems_max": 300000,
-    "coins_min": 17,
-    "coins_max": 17,
+    "gems_max": 375000,
+    "coins_min": 17000000,
+    "coins_max": 22000000,
     "demand": "Normal Status",
     "status": "Stable",
     "reforge": "2x Size🍔 , Lightning ⚡"
@@ -83,8 +68,8 @@
     "value_max": 375000,
     "gems_min": 280000,
     "gems_max": 280000,
-    "coins_min": 16,
-    "coins_max": 16,
+    "coins_min": 16000000,
+    "coins_max": 21000000,
     "demand": "Normal Status",
     "status": "Stable",
     "reforge": "Binoculars👓"
@@ -194,4 +179,5 @@
     "status": "Dropping",
     "reforge": "2x Size🍔 , Binoculars👓"
   }
+
 ]
