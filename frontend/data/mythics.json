@@ -115,7 +115,7 @@
     "gems_max": 5000,
     "coins_min": 800000,
     "coins_max": 800000,
-    "demand": "L ow Status",
+    "demand": "Low Status",
     "status": "Stable",
     "reforge": "Binoculars👓"
   },
@@ -244,8 +244,8 @@
     "image": "https://lh3.googleusercontent.com/sitesv/AAzXCkcot_ZaysD3cRp9qoVptXAW1ch3krf1eBKqKhBKbGC7DtvrlqLMZBbPQys7h5ZTooR11tQn0tzMHXJ6PTqLei7_gZGQ8eL7Bwbd4ye8Iu9CgBn0he1Jy8paxKmPN0eVIMFxqsds_2SiCkLsKYo9XFKr_sSFMNd1knDj-gIss6y2N0O3LFtlJHonI9bjmY5t1eGgzE1XZCF1tD2gVHao118NOEg6KZxxlJ4z=w1280",
     "raw": "7.19k Exists ------------------- V alue: 45k Gems: 30k Coins: 5m ------------------- Demand: Normal Status: Fluctuating ------------------- Best Reforge: 2x Size🍔 , Binoculars👓",
     "exists": 7190,
-    "value_min": 0,
-    "value_max": 0,
+    "value_min": 45000,
+    "value_max": 45000,
     "gems_min": 30000,
     "gems_max": 30000,
     "coins_min": 5000000,
@@ -314,4 +314,5 @@
     "status": "Fluctuating",
     "reforge": "2x Size🍔"
   }
+
 ]
