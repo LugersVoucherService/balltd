@@ -1,20 +1,5 @@
 [
   {
-    "name": "Unknown",
-    "image": "",
-    "raw": "Demand: Poor ➡ Low ➡ Below Average ➡ Normal ➡ Above Average ➡ Great ➡ Godly ➡ Supreme -------------------------------------------------------------- Status: Quickly Dropping ➡ Dropping ➡ Slowly Dropping ➡ Stable / Fluctuating ➡ Slowly Rising ➡ Rising ➡ Rising Quickly -------------------------------------------------------------- Formula: ((NBV- OBV) / OBV) * 100 = % Drop/Rise -------------------------------------------------------------- OBV = Old Ball Value NBV = New Ball Value -------------------------------------------------------------- Quickly Dropping ➡ -20%+ Dropping ➡ -10% - 20% Slowly Dropping ➡ -5% - 10% Stable / Fluctuating ➡ -5% - +5% Slowly Rising ➡ +5% - +10% Rising ➡ +10% - +20% Rising Quickly ➡ 20%+",
-    "exists": 0,
-    "value_min": 20,
-    "value_max": 20,
-    "gems_min": 0,
-    "gems_max": 0,
-    "coins_min": 0,
-    "coins_max": 0,
-    "demand": "Poor",
-    "status": "Quickly Dropping",
-    "reforge": ""
-  },
-  {
     "name": "Shiny Meteor",
     "image": "https://lh3.googleusercontent.com/sitesv/AAzXCkcZ6NSapYtvfJNCEudpLu6omEdb4dIoN-O7E5CrD77YizThyZhSc7VGYa5-XNEPmjFR6DKcPIQLaWv6v7CuenfkqfOi22FP_5DbVdKK8TNe_gHw38Bt91oBR1TLL5c6nXXYuUwSNyqOhSrWxP2q9VvaHwtfOoPmXWonrGH8AXD1ZMUUQ5itrkSqTNeC3RT65s4m1-cIwOHfxJMfzsCy_F4NheYULn3-I0Rt_uw=w1280",
     "raw": "74 Exists ------------------- Value: 8m Gems: 7m Coins: 150-175m ------------------- Demand: Great Status: Slowly Rising ------------------- Best Reforge: 2x Size🍔 , Melee⚔️",
@@ -124,12 +109,12 @@
     "image": "https://lh3.googleusercontent.com/sitesv/AAzXCkcJ4fiVr_YQ7AhkHTZpeqAqGrSB1YOImKVRkseqplO3y3udwDixnNIT04RYT9C5uCfnABqYvRpzo-D2vOPc5OXEHdFbjbTrCV5TpMyypVPv4j9dOoLsE_UK5Cz_LVGNTrrfeva2LrWyaSxxLtS5rfzEgyr5mWecThEN6-XGl4boFVTjL0-JbdK10g67UqdGfMdepLjx5T5iBorLaQV_kPpgPDcQ_O3ZO41wpqw=w1280",
     "raw": "3 Exists ------------------- Value: 37.5 - 45m Gems: 30m Coins: 5 - 6.5b Demand: Low Status: Stable ------------------- Best Reforge: 2x Size🍔 , Binoculars👓",
     "exists": 3,
-    "value_min": 37,
-    "value_max": 37,
+    "value_min": 37500000,
+    "value_max": 45000000,
     "gems_min": 30000000,
     "gems_max": 30000000,
-    "coins_min": 5,
-    "coins_max": 5,
+    "coins_min": 5000000000,
+    "coins_max": 6500000000,
     "demand": "Low Status",
     "status": "Stable",
     "reforge": "2x Size🍔 , Binoculars👓"
@@ -139,8 +124,8 @@
     "image": "https://lh3.googleusercontent.com/sitesv/AAzXCkebjZ9Qqd_Qn9zKWXSUCAXLDLi3dGAPVQxAGALdIRoQSbbY5NH00P6E12YgkBCFb8lLU6hdzuu1J-8RELj50OSwU6H6D60cWmgTaCe6zU_d31xnvwsouHqKukGpzW74P3_mq5OI3CpkRdlCsY3w6bMdQN9fbYnKvSYkm6ToDoUr6-o5OUwdNxqqEih2bLuMZs6dWjt7aIKklhJWtFhQgpSb55M6CdyZCAIreSU=w1280",
     "raw": "2 Exists ------------------- Value: 50 - 65m Gems: 45m Coins: 10-12b ------------------- Demand: Below Average Status: Stable ------------------- Best Reforge: 2x Size🍔 , Binoculars👓",
     "exists": 2,
-    "value_min": 50,
-    "value_max": 50,
+    "value_min": 50000000,
+    "value_max": 65000000,
     "gems_min": 45000000,
     "gems_max": 45000000,
     "coins_min": 10000000000,
@@ -194,4 +179,5 @@
     "status": "Fluctuating",
     "reforge": "2x Size🍔 , Binoculars👓"
   }
+
 ]
