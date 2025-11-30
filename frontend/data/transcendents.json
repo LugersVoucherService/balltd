@@ -52,7 +52,7 @@
     "value_min": 375000,
     "value_max": 400000,
     "gems_min": 300000,
-    "gems_max": 375000,
+    "gems_max": 300000,
     "coins_min": 17000000,
     "coins_max": 22000000,
     "demand": "Normal Status",
@@ -145,7 +145,7 @@
     "gems_max": 1500000,
     "coins_min": 62500000,
     "coins_max": 62500000,
-    "demand": "",
+    "demand": "Below Average Status",
     "status": "Stable",
     "reforge": "2x Size🍔 , Binoculars👓 , Money Printer🖨️"
   },
@@ -179,5 +179,5 @@
     "status": "Dropping",
     "reforge": "2x Size🍔 , Binoculars👓"
   }
-
 ]
+
